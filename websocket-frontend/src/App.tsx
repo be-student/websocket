@@ -3,12 +3,12 @@ import logo from "./logo.svg";
 import "./App.css";
 import { io } from "socket.io-client"; //모듈 가져오기
 
-const socket = io("http://localhost:4000");
+const socket = io("ws://localhost:4000");
 
 function App() {
-  useEffect(() => {
-    socket.emit("message");
-  }, []);
+  const onClick = () => {
+    socket.emit("message", "hello");
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -16,6 +16,7 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and save to reload.
         </p>
+        <button onClick={onClick}>testing</button>
         <a
           className="App-link"
           href="https://reactjs.org"

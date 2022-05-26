@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-
+import { WsAdapter } from '@nestjs/platform-ws';
 declare const module: any;
 
 async function bootstrap() {
@@ -13,6 +13,8 @@ async function bootstrap() {
     .setVersion('1.0')
     .addTag('NESTJS TEMPLATE')
     .build();
+  app.useWebSocketAdapter(new WsAdapter(app));
+  app.enableCors();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
